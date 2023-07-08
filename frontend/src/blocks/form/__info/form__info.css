@@ -1,0 +1,30 @@
+.form__info {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 13px;
+    width: 358px;
+    background-color: #FFF;
+    border: none;
+    border-bottom: 1px solid #C4C4C4;
+    outline: none;
+    border-color: rgba(0, 0, 0, .2);
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    box-sizing: border-box;
+
+}
+
+.form__info::placeholder {
+    color: #C4C4C4;
+}
+
+.form__info:last-of-type {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .form__info {
+        width: 238px;
+    }
+}
