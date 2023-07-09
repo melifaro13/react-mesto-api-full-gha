@@ -12,7 +12,7 @@ export function register(email, password) {
     body: JSON.stringify({ email, password }),
   })
     .then((response) => {
-      if (response.status === 201) {
+      if (response.status === 200) {
        return response.json();
         } else {
           response.json().then((data) => console.error(data.error));

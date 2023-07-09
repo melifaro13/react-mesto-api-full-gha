@@ -62,13 +62,15 @@ function App() {
   // }, []);
 
   function onRegister(email, password) {
-    auth.register(email, password)
+    auth
+      .register(email, password)
       .then(() => {
         setPopupImage(done);
         setPopupTitle('Вы успешно зарегистрировались!');
         navigate('/signin');
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         setPopupImage(cancel);
         setPopupTitle('Что-то пошло не так! Попробуйте ещё раз.');
       })

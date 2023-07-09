@@ -12,6 +12,7 @@ const auth = require('./middlewares/auth');
 const extractJwt = require('./middlewares/extractJwt');
 const handleError = require('./middlewares/handleError');
 const NotFoundDocumentError = require('./errors/NotFoundDocumentError');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 const { PORT = 4000 } = process.env;
@@ -26,6 +27,7 @@ app.use(extractJwt);
 app.post('/signin', validationLogin, login);
 app.post('/signup', validationCreateUser, createUser);
 
+app.use(requestLogger);
 app.use(auth);
 app.use(routes);
 
@@ -41,6 +43,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use('*', NotFoundDocumentError);
 
+app.use(errorLogger);
 app.use(errors());
 app.use(handleError);
 
