@@ -24,10 +24,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(extractJwt);
 
+app.use(requestLogger);
+
 app.post('/signin', validationLogin, login);
 app.post('/signup', validationCreateUser, createUser);
 
-app.use(requestLogger);
 app.use(auth);
 app.use(routes);
 
