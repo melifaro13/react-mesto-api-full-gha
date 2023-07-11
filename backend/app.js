@@ -15,7 +15,11 @@ const NotFoundDocumentError = require('./errors/NotFoundDocumentError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const {
+  PORT = 3000,
+  // eslint-disable-next-line no-unused-vars
+  MONGO_URL = 'mongodb://localhost:27017',
+} = process.env;
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
@@ -32,7 +36,8 @@ app.post('/signup', validationCreateUser, createUser);
 app.use(auth);
 app.use(routes);
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+// eslint-disable-next-line no-template-curly-in-string
+mongoose.connect(`${MONGO_URL}/mestodb`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   family: 4,
