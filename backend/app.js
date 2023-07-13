@@ -21,7 +21,7 @@ const {
   MONGO_URL = 'mongodb://localhost:27017',
 } = process.env;
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'https://api.melifaro13.nomoredomains.work', credentials: true }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
