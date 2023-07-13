@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.109.25
+IP 158.160.109.25
 
 Frontend https://melifaro13.nomoredomains.work
 
