@@ -33,18 +33,28 @@ export function authorize(email, password) {
     credentials: 'include',
     body: JSON.stringify({ password, email }),
   })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      response.json().then((data) => console.error(data.message));
-      throw new Error();
-    }
-  })
-    .catch((err) => {
-      throw err;
-    });
-};
+  .then(checkRes);
+}
+
+function checkRes(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res.status);
+}
+
+//   .then((response) => {
+//     if (response.ok) {
+//       return response.json();
+//     } else {
+//       response.json().then((data) => console.error(data.message));
+//       throw new Error();
+//     }
+//   })
+//     .catch((err) => {
+//       throw err;
+//     });
+// };
 
 export function getToken() {
   return fetch(`${BASE_URL}/users/me`, {

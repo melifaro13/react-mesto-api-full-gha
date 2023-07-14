@@ -73,7 +73,7 @@ function App() {
           setMailName(email);
           navigate('/', { replace: true });
       })
-      .catch((e) => {
+      .catch(() => {
         setPopupImage(cancel);
         setPopupTitle('Что-то пошло не так! Попробуйте ещё раз.');
         handleInfoTooltip();
