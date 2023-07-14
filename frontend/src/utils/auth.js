@@ -41,9 +41,7 @@ export function authorize(email, password) {
         throw new Error();
       }
     })
-    .catch((err) => {
-      throw err;
-    });
+    .catch((err) => console.log(err));
 }
 
 export function getToken() {
