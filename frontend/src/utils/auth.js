@@ -33,14 +33,22 @@ export function authorize(email, password) {
     credentials: "include",
     body: JSON.stringify({ email, password }),
   })
-   .then((response) => {
-   if (response.status === 200) {
-    return response.json();
-      } else {
-        response.json().then((data) => console.error(data.message));
-        throw new Error();
-      }
-    })
+  //  .then((response) => {
+  //  if (response.status === 200) {
+  //   return response.json();
+  //     } else {
+  //       response.json().then((data) => console.error(data.message));
+  //       throw new Error();
+  //     }
+  //   })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return res.json().then((err) => {
+      throw new Error(err.message);
+    });
+  });
 }
 
 export function getToken() {
