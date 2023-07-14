@@ -11,6 +11,7 @@ const { validationLogin, validationCreateUser } = require('./middlewares/validat
 const auth = require('./middlewares/auth');
 const extractJwt = require('./middlewares/extractJwt');
 const handleError = require('./middlewares/handleError');
+const crashTest = require('./middlewares/crashTest');
 const NotFoundDocumentError = require('./errors/NotFoundDocumentError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -28,11 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(extractJwt);
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+app.get('/crash-test', crashTest);
 
 app.use(requestLogger);
 
