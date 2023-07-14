@@ -61,19 +61,38 @@ function App() {
       .finally(handleInfoTooltip);
   }
 
+
   function onLogin(email, password) {
-    auth.authorize(email, password)
+    if (!email || !password) {
+      return;
+    }
+    auth
+      .authorize(email, password)
       .then(() => {
-        setIsLoggedIn(true);
-        setMailName(email);
-        navigate('/', { replace: true });
+          setIsLoggedIn(true);
+          setMailName(email);
+          navigate('/', { replace: true });
       })
-      .catch(() => {
+      .catch((e) => {
         setPopupImage(cancel);
         setPopupTitle('Что-то пошло не так! Попробуйте ещё раз.');
         handleInfoTooltip();
       });
   }
+
+  // function onLogin(email, password) {
+  //   auth.authorize(email, password)
+  //     .then(() => {
+  //       setIsLoggedIn(true);
+  //       setMailName(email);
+  //       navigate('/', { replace: true });
+  //     })
+  //     .catch(() => {
+  //       setPopupImage(cancel);
+  //       setPopupTitle('Что-то пошло не так! Попробуйте ещё раз.');
+  //       handleInfoTooltip();
+  //     });
+  // }
 
   useEffect(() => {
     if (isLoggedIn === true) {
