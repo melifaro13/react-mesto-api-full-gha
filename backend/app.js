@@ -11,6 +11,7 @@ const { validationLogin, validationCreateUser } = require('./middlewares/validat
 const auth = require('./middlewares/auth');
 const extractJwt = require('./middlewares/extractJwt');
 const handleError = require('./middlewares/handleError');
+const crashTest = require('./middlewares/crashTest');
 const NotFoundDocumentError = require('./errors/NotFoundDocumentError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(extractJwt);
 
 app.use(requestLogger);
+app.get('/crash-test', crashTest);
 
 app.post('/signin', validationLogin, login);
 app.post('/signup', validationCreateUser, createUser);

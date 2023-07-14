@@ -35,31 +35,15 @@ function App() {
   useEffect(() => {
     auth.getToken()
       .then((res) => {
-        if (res) {
           setMailName(res.email);
           setIsLoggedIn(true);
           navigate('/', { replace: true });
-        }
       })
       .catch((err) => {
+        setIsLoggedIn(false);
         console.log(`Ошибка: ${err}`)});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-  // useEffect(() => {
-  //   if (localStorage.getItem('jwt')) {
-  //     const jwt = localStorage.getItem('jwt');
-  //     auth.getToken(jwt)
-  //       .then((res) => {
-  //         if (res) {
-  //           setIsLoggedIn(true);
-  //           setMailName(res.data.email);
-  //           navigate('/', { replace: true });
-  //         }
-  //       })
-  //       .catch((err) => console.log(`Ошибка: ${err}`));
-  //   }
-  // }, []);
 
   function onRegister(email, password) {
     auth
@@ -80,7 +64,6 @@ function App() {
   function onLogin(email, password) {
     auth.authorize(email, password)
       .then(() => {
-        //localStorage.setItem('jwt', res.token);
         setIsLoggedIn(true);
         setMailName(email);
         navigate('/', { replace: true });

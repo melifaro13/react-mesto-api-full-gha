@@ -41,12 +41,6 @@ export function authorize(email, password) {
         throw new Error();
       }
     })
-    // .then((data) => {
-    //   if (data.token) {
-    //     localStorage.setItem('jwt', data.token);
-    //     return data;
-    //   }
-    // })
     .catch((err) => console.log(err));
 }
 
@@ -56,12 +50,17 @@ export function getToken() {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      //Authorization: `Bearer ${jwt}`,
     },
     credentials: "include",
   })
-    .then((res) => res.json())
-    .then((data) => data);
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return res.json().then((err) => {
+      throw new Error(err.message);
+    });
+  });
 }
 
 export function logout() {
