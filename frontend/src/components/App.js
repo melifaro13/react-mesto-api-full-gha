@@ -80,20 +80,6 @@ function App() {
       });
   }
 
-  // function onLogin(email, password) {
-  //   auth.authorize(email, password)
-  //     .then(() => {
-  //       setIsLoggedIn(true);
-  //       setMailName(email);
-  //       navigate('/', { replace: true });
-  //     })
-  //     .catch(() => {
-  //       setPopupImage(cancel);
-  //       setPopupTitle('Что-то пошло не так! Попробуйте ещё раз.');
-  //       handleInfoTooltip();
-  //     });
-  // }
-
   useEffect(() => {
     if (isLoggedIn === true) {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
