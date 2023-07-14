@@ -23,6 +23,7 @@ const {
 } = process.env;
 
 app.use(cors({ origin: 'https://melifaro13.nomoredomains.work', credentials: true }));
+app.get('/crash-test', crashTest);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,7 +31,6 @@ app.use(cookieParser());
 app.use(extractJwt);
 
 app.use(requestLogger);
-app.get('/crash-test', crashTest);
 
 app.post('/signin', validationLogin, login);
 app.post('/signup', validationCreateUser, createUser);
