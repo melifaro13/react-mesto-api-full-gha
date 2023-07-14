@@ -24,7 +24,7 @@ export function register(email, password) {
 }
 
 
-export const authorize = (email, password) => {
+export function authorize(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -33,41 +33,18 @@ export const authorize = (email, password) => {
     credentials: 'include',
     body: JSON.stringify({ password, email }),
   })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        response.json().then((data) => console.error(data.message));
-        throw new Error();
-      }
-    })
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      response.json().then((data) => console.error(data.message));
+      throw new Error();
+    }
+  })
     .catch((err) => {
       throw err;
     });
 };
-
-// export function authorize(email, password) {
-//   return fetch(`${BASE_URL}/signin`, {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     credentials: "include",
-//     body: JSON.stringify({ email, password }),
-//   })
-//    .then((response) => {
-//    if (response.status === 200) {
-//     return response.json();
-//       } else {
-//         throw new Error('Ошибка авторизации');
-//       }
-//     })
-//     .catch((error) => {
-//       console.error(error.message);
-//       throw error;
-//     });
-// }
 
 export function getToken() {
   return fetch(`${BASE_URL}/users/me`, {
