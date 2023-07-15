@@ -50,7 +50,7 @@ function App() {
       .register(email, password)
       .then(() => {
         setPopupImage(done);
-        setPopupTitle('Вы успешно зарегистрировались!');
+        setPopupTitle('Вы успешно зарегистрировались! Поздравляем!');
         navigate('/signin');
       })
       .catch((e) => {
